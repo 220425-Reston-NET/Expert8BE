@@ -16,14 +16,13 @@ namespace expert8DL
         {
             
             string SQLQuery = @"insert into Patient
-                                values (@pID,@pFirstName,@pLastname,@pEmail,@pPhone,@pAddress,@pCity,@pState,@pZip,@pPassword)";
+                                values (@pFirstName,@pLastname,@pEmail,@pPhone,@pAddress,@pCity,@pState,@pZip,@pPassword)";
 
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
                 con.Open();
                 SqlCommand command = new SqlCommand(SQLQuery, con);
 
-                command.Parameters.AddWithValue("@pID", p_resource.PID);
                 command.Parameters.AddWithValue("@pFirstName", p_resource.FirstName);
                 command.Parameters.AddWithValue("@pLastname", p_resource.LastName);
                 command.Parameters.AddWithValue("@pEMail", p_resource.Email);
@@ -131,7 +130,7 @@ namespace expert8DL
                 {
                     listOfprices.Add(new Price(){
                         PrID = reader.GetInt32(0),
-                        ServicePrice = reader.GetDouble(1),
+                        ServicePrice = reader.GetDecimal(1),
                         
 
                     });

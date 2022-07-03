@@ -4,6 +4,6 @@ namespace Expert8Model
     {
         public int PrID { get; set; }
 
-        public Double ServicePrice { get; set; }
+        public Decimal ServicePrice { get; set; }
     }
 }

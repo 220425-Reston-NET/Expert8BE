@@ -1,6 +1,6 @@
 ﻿using Expert8Model;
 
-namespace patientBL
+namespace expert8BL
 {
     public interface ipatientBL
     {

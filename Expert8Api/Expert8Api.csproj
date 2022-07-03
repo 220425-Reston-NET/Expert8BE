@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="4.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Expert8Model\Expert8Model.csproj" />
+    <ProjectReference Include="..\Expert8DL\Expert8DL.csproj" />
+    <ProjectReference Include="..\Expert8BL\Expert8BL.csproj" />
   </ItemGroup>
 
 </Project>

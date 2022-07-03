@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using expert8DL;
 using Expert8Model;
 
-namespace patientBL
+namespace expert8BL
 {
     public class patientBL : ipatientBL
     {
@@ -16,14 +16,8 @@ namespace patientBL
 
         public void addpatient(Patient p_patient)
         {
-            Patient foundedpatient = searchpatientbyemailandpassword(p_patient.Email, p_patient.Password);
-            if (foundedpatient == null)
-            {
+            
                 _patientrepo.AddCus(p_patient);
-            }
-            else{
-                throw new ValidationException("Patient Already Exist!");
-            }
         }
 
         public List<Patient> GetAllPatients()
