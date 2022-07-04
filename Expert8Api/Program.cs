@@ -23,7 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<iexpert8DL<Patient>, patientDL>(repo => new patientDL(builder.Configuration.GetConnectionString("Connection String")));
+builder.Services.AddScoped<iexpert8DL<Patient>, patientDL>(repo => new patientDL(Environment.GetEnvironmentVariable("Connection_String")));
 builder.Services.AddScoped<ipatientBL, patientBL>();
 var app = builder.Build();
 
