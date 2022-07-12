@@ -79,8 +79,7 @@ namespace expert8DL
                                 inner join MHPrice mh on jt.mhpID = mh.mhpID
                                 inner join MHServices ms on jt.mhsID = ms.mhsID
                                 inner join MHSpecialist mhs on jt.ssID = mhs.ssID
-                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
-                                inner join WayofMeeting wm on smj.wID = wm.wID
+                                inner join WayofMeeting wm on jt.wID = wm.wID
                                 where p.pID = @pID;";
 
              List<Service> listOfservices = new List<Service>();
@@ -118,8 +117,7 @@ namespace expert8DL
                                 inner join MHPrice mh on jt.mhpID = mh.mhpID
                                 inner join MHServices ms on jt.mhsID = ms.mhsID
                                 inner join MHSpecialist mhs on jt.ssID = mhs.ssID
-                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
-                                inner join WayofMeeting wm on smj.wID = wm.wID
+                                inner join WayofMeeting wm on jt.wID = wm.wID
                                 where p.pID = @pID;";
 
              List<Specialist> listOfspecialists = new List<Specialist>();
@@ -158,8 +156,7 @@ namespace expert8DL
                                 inner join MHPrice mh on jt.mhpID = mh.mhpID
                                 inner join MHServices ms on jt.mhsID = ms.mhsID
                                 inner join MHSpecialist mhs on jt.ssID = mhs.ssID
-                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
-                                inner join WayofMeeting wm on smj.wID = wm.wID
+                                inner join WayofMeeting wm on jt.wID = wm.wID
                                 where p.pID = @pID;";
 
              List<Meeting> listOfmeeting = new List<Meeting>();
@@ -195,8 +192,7 @@ namespace expert8DL
                                 inner join MHPrice mh on jt.mhpID = mh.mhpID
                                 inner join MHServices ms on jt.mhsID = ms.mhsID
                                 inner join MHSpecialist mhs on jt.ssID = mhs.ssID
-                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
-                                inner join WayofMeeting wm on smj.wID = wm.wID
+                                inner join WayofMeeting wm on jt.wID = wm.wID
                                 where p.pID = @pID;";
 
              List<Price> listOfprices = new List<Price>();

@@ -25,9 +25,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Environment.GetEnvironmentVariable("Connection_String")
-builder.Services.AddScoped<iexpert8DL<Patient>, patientDL>(repo => new patientDL(builder.Configuration.GetConnectionString("Connection String")));
+builder.Services.AddScoped<iexpert8DL<Patient>, patientDL>(repo => new patientDL(Environment.GetEnvironmentVariable("Connection_String")));
 builder.Services.AddScoped<ipatientBL, patientBL>();
-builder.Services.AddScoped<iexpert8DL<JoinTable>, specialistDL>(repo => new specialistDL(builder.Configuration.GetConnectionString("Connection String")));
+builder.Services.AddScoped<iexpert8DL<JoinTable>, specialistDL>(repo => new specialistDL(Environment.GetEnvironmentVariable("Connection_String")));
 builder.Services.AddScoped<ispecialistBL, specialistBL>();
 var app = builder.Build();
 
