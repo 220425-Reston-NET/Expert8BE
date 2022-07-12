@@ -76,8 +76,11 @@ namespace expert8DL
         {
             string SQLQuery = @"select ms.* from Patient p
                                 inner join JoinTable jt on p.pID = jt.pID
-                                inner join MHPrice mh on jt.jtID = mh.mhpID
+                                inner join MHPrice mh on jt.mhpID = mh.mhpID
                                 inner join MHServices ms on jt.mhsID = ms.mhsID
+                                inner join MHSpecialist mhs on jt.ssID = mhs.ssID
+                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
+                                inner join WayofMeeting wm on smj.wID = wm.wID
                                 where p.pID = @pID;";
 
              List<Service> listOfservices = new List<Service>();
@@ -97,7 +100,7 @@ namespace expert8DL
                     listOfservices.Add(new Service(){
                         SID = reader.GetInt32(0),
                         ServiceName = reader.GetString(1),
-                        Prices = givepricetoservice(reader.GetInt32(0))
+                        Specialists = givespecialisttoservice(reader.GetInt32(0))
 
                     });
                 }
@@ -106,12 +109,94 @@ namespace expert8DL
             return listOfservices;
         }
 
+        // specialist
+
+        private List<Specialist> givespecialisttoservice(int s_pID)
+        {
+            string SQLQuery = @"select mhs.* from Patient p
+                                inner join JoinTable jt on p.pID = jt.pID
+                                inner join MHPrice mh on jt.mhpID = mh.mhpID
+                                inner join MHServices ms on jt.mhsID = ms.mhsID
+                                inner join MHSpecialist mhs on jt.ssID = mhs.ssID
+                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
+                                inner join WayofMeeting wm on smj.wID = wm.wID
+                                where p.pID = @pID;";
+
+             List<Specialist> listOfspecialists = new List<Specialist>();
+
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                command.Parameters.AddWithValue("@pID", s_pID);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    listOfspecialists.Add(new Specialist(){
+                        SSID = reader.GetInt32(0),
+                        SpecialistName = reader.GetString(1),
+                        WayOfMeeting = givemeetingtospecialist(reader.GetInt32(0))
+                        
+
+                    });
+                }
+            }
+
+            return listOfspecialists;
+        }
+
+        // meeting
+
+        private List<Meeting> givemeetingtospecialist(int s_pID)
+        {
+            string SQLQuery = @"select wm.* from Patient p
+                                inner join JoinTable jt on p.pID = jt.pID
+                                inner join MHPrice mh on jt.mhpID = mh.mhpID
+                                inner join MHServices ms on jt.mhsID = ms.mhsID
+                                inner join MHSpecialist mhs on jt.ssID = mhs.ssID
+                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
+                                inner join WayofMeeting wm on smj.wID = wm.wID
+                                where p.pID = @pID;";
+
+             List<Meeting> listOfmeeting = new List<Meeting>();
+
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                command.Parameters.AddWithValue("@pID", s_pID);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    listOfmeeting.Add(new Meeting(){
+                        wID = reader.GetInt32(0),
+                        MeetingServices = reader.GetString(1),
+                        Prices = givepricetoservice (reader.GetInt32(0))
+                    
+                    });
+                }
+            }
+
+            return listOfmeeting;
+        }
+
         private List<Price> givepricetoservice(int s_pID)
         {
             string SQLQuery = @"select mh.* from Patient p
                                 inner join JoinTable jt on p.pID = jt.pID
-                                inner join MHPrice mh on jt.jtID = mh.mhpID
+                                inner join MHPrice mh on jt.mhpID = mh.mhpID
                                 inner join MHServices ms on jt.mhsID = ms.mhsID
+                                inner join MHSpecialist mhs on jt.ssID = mhs.ssID
+                                inner join SpecialistMeetingJoin smj on mhs.ssID = smj.ssID
+                                inner join WayofMeeting wm on smj.wID = wm.wID
                                 where p.pID = @pID;";
 
              List<Price> listOfprices = new List<Price>();

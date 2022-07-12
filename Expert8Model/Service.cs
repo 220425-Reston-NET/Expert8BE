@@ -5,6 +5,6 @@ namespace Expert8Model
         public int SID { get; set; }
         public string ServiceName { get; set; }
 
-        public List<Price> Prices { get; set; }
+        public List<Specialist> Specialists { get; set; }
     }
 }
