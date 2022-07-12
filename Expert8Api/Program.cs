@@ -1,5 +1,7 @@
 using expert8BL;
+using Expert8BL;
 using expert8DL;
+using Expert8DL;
 using Expert8Model;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +24,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddScoped<iexpert8DL<Patient>, patientDL>(repo => new patientDL(Environment.GetEnvironmentVariable("Connection_String")));
+// Environment.GetEnvironmentVariable("Connection_String")
+builder.Services.AddScoped<iexpert8DL<Patient>, patientDL>(repo => new patientDL(builder.Configuration.GetConnectionString("Connection String")));
 builder.Services.AddScoped<ipatientBL, patientBL>();
+builder.Services.AddScoped<iexpert8DL<JoinTable>, specialistDL>(repo => new specialistDL(builder.Configuration.GetConnectionString("Connection String")));
+builder.Services.AddScoped<ispecialistBL, specialistBL>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
