@@ -21,7 +21,7 @@ namespace Expert8Api.Controllers
             try
             {
                 _specialistBL.addservices(s_services);
-                return Ok();
+                return Created( "Service is added", s_services);
             }
             catch (System.Exception)
             {
